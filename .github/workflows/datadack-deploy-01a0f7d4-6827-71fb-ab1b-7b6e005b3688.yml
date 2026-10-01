@@ -1,0 +1,27 @@
+# Managed by DataDack Cloud. Build logic lives centrally, so platform
+# updates do not require changes to this repository.
+# datadack-workflow-version: 13
+name: "DataDack Deploy (gatsby-examples)"
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "gatsby-examples/**"
+      - ".github/workflows/datadack-deploy-01a0f7d4-6827-71fb-ab1b-7b6e005b3688.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: datadack-deploy-main-01a0f7d4-6827-71fb-ab1b-7b6e005b3688
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    uses: DataDack/workflows/.github/workflows/build.yml@main
+    with:
+      project_id: "01a0f7d4-6827-71fb-ab1b-7b6e005b3688"
+      build_type: managed_apps
