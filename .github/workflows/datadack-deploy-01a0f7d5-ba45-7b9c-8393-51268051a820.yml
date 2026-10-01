@@ -1,0 +1,27 @@
+# Managed by DataDack Cloud. Build logic lives centrally, so platform
+# updates do not require changes to this repository.
+# datadack-workflow-version: 13
+name: "DataDack Deploy (vite-examples)"
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "vite-examples/**"
+      - ".github/workflows/datadack-deploy-01a0f7d5-ba45-7b9c-8393-51268051a820.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: datadack-deploy-main-01a0f7d5-ba45-7b9c-8393-51268051a820
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    uses: DataDack/workflows/.github/workflows/build.yml@main
+    with:
+      project_id: "01a0f7d5-ba45-7b9c-8393-51268051a820"
+      build_type: managed_apps
