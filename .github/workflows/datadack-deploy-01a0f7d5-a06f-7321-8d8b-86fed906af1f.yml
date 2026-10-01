@@ -1,0 +1,27 @@
+# Managed by DataDack Cloud. Build logic lives centrally, so platform
+# updates do not require changes to this repository.
+# datadack-workflow-version: 13
+name: "DataDack Deploy (svelte-examples)"
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "svelte-examples/**"
+      - ".github/workflows/datadack-deploy-01a0f7d5-a06f-7321-8d8b-86fed906af1f.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: datadack-deploy-main-01a0f7d5-a06f-7321-8d8b-86fed906af1f
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    uses: DataDack/workflows/.github/workflows/build.yml@main
+    with:
+      project_id: "01a0f7d5-a06f-7321-8d8b-86fed906af1f"
+      build_type: managed_apps
