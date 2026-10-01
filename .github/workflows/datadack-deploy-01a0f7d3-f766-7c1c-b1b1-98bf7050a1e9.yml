@@ -1,0 +1,27 @@
+# Managed by DataDack Cloud. Build logic lives centrally, so platform
+# updates do not require changes to this repository.
+# datadack-workflow-version: 13
+name: "DataDack Deploy (angular-examples)"
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "angular-examples/**"
+      - ".github/workflows/datadack-deploy-01a0f7d3-f766-7c1c-b1b1-98bf7050a1e9.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: datadack-deploy-main-01a0f7d3-f766-7c1c-b1b1-98bf7050a1e9
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    uses: DataDack/workflows/.github/workflows/build.yml@main
+    with:
+      project_id: "01a0f7d3-f766-7c1c-b1b1-98bf7050a1e9"
+      build_type: managed_apps
